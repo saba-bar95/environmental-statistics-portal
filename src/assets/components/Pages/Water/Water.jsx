@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import backgroundImg from "./Background/background.jpg";
+import backgroundImg from "./Background/background.webp";
 import Children from "./Children/Children";
 import Arrow from "./Svg/Arrow";
 

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import backgroundImg from "./Background/background.jpg";
+import backgroundImg from "./Background/background.webp";
 import { useEffect } from "react";
 // --- Import all chart components ---
 import LineChart1 from "./Charts/Chart1/LineCharts.jsx";

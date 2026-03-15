@@ -1,30 +1,30 @@
 // Air
 import { text as airText } from "./Texts/Air/text";
-import airBackground from "./Backgrounds/Air/background.jpg";
+import airBackground from "./Backgrounds/Air/background.webp";
 // Climate
 import { text as climateText } from "./Texts/Climate/text";
-import climateBackground from "./Backgrounds/Climate/background.jpg";
+import climateBackground from "./Backgrounds/Climate/background.webp";
 // Water
 import { text as waterText } from "./Texts/Water/text";
-import waterBackground from "./Backgrounds/Water/background.jpg";
+import waterBackground from "./Backgrounds/Water/background.webp";
 // Nature
 import { text as natureText } from "./Texts/Biodiversity/text";
-import natureBackground from "./Backgrounds/Biodiversity/background.jpg";
+import natureBackground from "./Backgrounds/Biodiversity/background.webp";
 // Transport
 import { text as transportText } from "./Texts/Transport/text";
-import transportBackground from "./Backgrounds/Transport/background.jpg";
+import transportBackground from "./Backgrounds/Transport/background.webp";
 // Energy
 import { text as energyText } from "./Texts/Energy/text";
-import energyBackground from "./Backgrounds/Energy/background.jpg";
+import energyBackground from "./Backgrounds/Energy/background.webp";
 // Reports
 import { text as reportsText } from "./Texts/Reports/text";
-import reportsBackground from "./Backgrounds/Reports/background.jpg";
+import reportsBackground from "./Backgrounds/Reports/background.webp";
 // Waste
 import { text as wasteText } from "./Texts/Waste/text";
-import wasteBackground from "./Backgrounds/Waste/background.jpg";
+import wasteBackground from "./Backgrounds/Waste/background.webp";
 // Others
 import { text as otherText } from "./Texts/Other/text";
-import otherBackground from "./Backgrounds/Other/background.jpg";
+import otherBackground from "./Backgrounds/Other/background.webp";
 
 const Sections = [
   {

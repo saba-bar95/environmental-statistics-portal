@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Slider.scss";
 import { useParams } from "react-router-dom";
 import Slides from "./Slides/Slides";
@@ -15,6 +15,12 @@ const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(Slides[0]);
   const [slideDirection, setSlideDirection] = useState(""); // Track slide direction
+
+  useEffect(() => {
+    Slides.forEach((slide) => {
+      new Image().src = slide.background1;
+    });
+  }, []);
 
   const nextSlide = () => {
     setSlideDirection("right"); // Set direction for next slide
@@ -49,12 +55,18 @@ const Slider = () => {
         className={`slide-content ${
           currentIndex === index ? "active" : ""
         } slide-${slideDirection}`}
-        key={index}>
+        key={index}
+      >
         <h2>{slide.text[language].header}</h2>
         <div className="stats">
           <div
             className="left"
-            style={{ backgroundImage: `url(${slide.background2})` }}></div>
+            style={
+              currentIndex === index
+                ? { backgroundImage: `url(${slide.background2})` }
+                : {}
+            }
+          ></div>
           <div className="right">
             <div className="top">
               <span className="number-1">
@@ -74,7 +86,8 @@ const Slider = () => {
                     className="number"
                     style={{
                       color: number2 < 0 ? "red" : "rgb(29, 191, 115)",
-                    }}>
+                    }}
+                  >
                     {number2Str}
                   </span>
                 </div>
@@ -93,7 +106,8 @@ const Slider = () => {
         className={`slider-container ${
           currentIndex === 4 ? "third-slide" : ""
         }`}
-        style={{ "--background-image": `url(${currentSlide.background1})` }}>
+        style={{ "--background-image": `url(${currentSlide.background1})` }}
+      >
         <div className="dark-layer" />
         <div className="content-container" key={currentIndex}>
           {slideContents}
@@ -123,13 +137,15 @@ const Slider = () => {
               <button
                 onClick={prevSlide}
                 className={currentIndex === 0 ? "disabled" : ""}
-                disabled={currentIndex === 0}>
+                disabled={currentIndex === 0}
+              >
                 <Left />
               </button>
               <button
                 onClick={nextSlide}
                 className={currentIndex === Slides.length - 1 ? "disabled" : ""}
-                disabled={currentIndex === Slides.length - 1}>
+                disabled={currentIndex === Slides.length - 1}
+              >
                 <Right />
               </button>
             </div>

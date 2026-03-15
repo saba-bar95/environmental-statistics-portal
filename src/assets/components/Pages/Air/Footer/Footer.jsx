@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./Footer.scss";
-import backgroundImg from "./Background/background.jpg";
+import backgroundImg from "./Background/background.webp";
 import links from "./links";
 import GreenArrow from "./Svgs/GreenArrow";
 

@@ -1,6 +1,6 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
-import backgroundImg from "./Background/background.jpg";
+import backgroundImg from "./Background/background.webp";
 import "./SupplyAndLosses.scss";
 import Faucet from "./Svgs/Faucet";
 import image1 from "./images/image-1.png";

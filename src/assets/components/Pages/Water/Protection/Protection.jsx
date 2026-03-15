@@ -1,6 +1,6 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import backgroundImg from "./Background/background.jpg";
+import backgroundImg from "./Background/background.webp";
 import Charts from "../../../../../Charts";
 import LineChart1 from "./Charts/LineCharts";
 import AreaCharts from "./Charts/AreaCharts";

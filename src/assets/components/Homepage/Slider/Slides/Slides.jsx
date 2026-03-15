@@ -1,27 +1,27 @@
 // Waste
 import { text as wasteText } from "./Texts/Waste/text";
-import wasteBackground1 from "./Backgrounds/Waste/background1.jpg";
-import wasteBackground2 from "./Backgrounds/Waste/background2.jpg";
+import wasteBackground1 from "./Backgrounds/Waste/background1.webp";
+import wasteBackground2 from "./Backgrounds/Waste/background2.webp";
 // Emissions
 import { text as emissionsText } from "./Texts/Emissions/text.js"; // Fixed typo in folder name
-import emissionsBackground1 from "./Backgrounds/Emissions/background1.jpg";
-import emissionsBackground2 from "./Backgrounds/Emissions/background2.jpg";
+import emissionsBackground1 from "./Backgrounds/Emissions/background1.webp";
+import emissionsBackground2 from "./Backgrounds/Emissions/background2.webp";
 // SupplyAndLosses
 import { text as lossesText } from "./Texts/SupplyAndLosses/text";
-import lossesBackground1 from "./Backgrounds/SupplyAndLosses/background1.jpg"; // Fixed to use background1.jpg
-import lossesBackground2 from "./Backgrounds/SupplyAndLosses/background2.jpg";
+import lossesBackground1 from "./Backgrounds/SupplyAndLosses/background1.webp"; // Fixed to use background1.webp
+import lossesBackground2 from "./Backgrounds/SupplyAndLosses/background2.webp";
 // Energy
 import { text as energyText } from "./Texts/Energy/text";
-import energyBackground1 from "./Backgrounds/Energy/background1.jpg"; // Fixed to use background1.jpg
-import energyBackground2 from "./Backgrounds/Energy/background2.jpg";
+import energyBackground1 from "./Backgrounds/Energy/background1.webp"; // Fixed to use background1.webp
+import energyBackground2 from "./Backgrounds/Energy/background2.webp";
 // Transport
 import { text as transportText } from "./Texts/Transport/text";
-import transportBackground1 from "./Backgrounds/Transport/background1.jpg"; // Fixed to use background1.jpg
-import transportBackground2 from "./Backgrounds/Transport/background2.jpg";
+import transportBackground1 from "./Backgrounds/Transport/background1.webp"; // Fixed to use background1.webp
+import transportBackground2 from "./Backgrounds/Transport/background2.webp";
 // Transport
 import { text as reportsText } from "./Texts/Reports/text";
-import reportsBackground1 from "./Backgrounds/Reports/background1.jpg"; // Fixed to use background1.jpg
-import reportsBackground2 from "./Backgrounds/Reports/background2.jpg";
+import reportsBackground1 from "./Backgrounds/Reports/background1.webp"; // Fixed to use background1.webp
+import reportsBackground2 from "./Backgrounds/Reports/background2.webp";
 
 const Slides = [
   {

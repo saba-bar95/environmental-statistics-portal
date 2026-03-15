@@ -1,5 +1,5 @@
 import { useParams, useLocation } from "react-router-dom";
-import backgroundImg from "./Background/background.jpg";
+import backgroundImg from "./Background/background.webp";
 import { useEffect } from "react";
 import Waste1 from "./Svg/Waste1";
 import Trash from "./Svg/Trash";

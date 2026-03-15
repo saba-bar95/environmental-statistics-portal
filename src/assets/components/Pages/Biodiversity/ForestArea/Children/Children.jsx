@@ -1,12 +1,12 @@
 // Protected Areas
 import { text as protectedAreasText } from "./Texts/ForestResources/text";
-import protectedAreasBackground from "./Backgrounds/ForestResources/background.jpg";
+import protectedAreasBackground from "./Backgrounds/ForestResources/background.webp";
 // ForestArea
 import { text as timberText } from "./Texts/Timber/text";
-import timberBackground from "./Backgrounds/Timber/background.jpg";
+import timberBackground from "./Backgrounds/Timber/background.webp";
 // Forest and Field Fires
 import { text as inventorizationText } from "./Texts/Inventorization/text";
-import inventorizationBackground from "./Backgrounds/Inventorization/background.jpg";
+import inventorizationBackground from "./Backgrounds/Inventorization/background.webp";
 
 const Children = [
   {

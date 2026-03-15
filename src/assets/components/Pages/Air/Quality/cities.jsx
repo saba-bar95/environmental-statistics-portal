@@ -1,7 +1,7 @@
-import background1 from "./CitiesBackgrounds/background-1.jpg";
-import background2 from "./CitiesBackgrounds/background-2.jpg";
-import background3 from "./CitiesBackgrounds/background-3.jpg";
-import background4 from "./CitiesBackgrounds/background-4.jpg";
+import background1 from "./CitiesBackgrounds/background-1.webp";
+import background2 from "./CitiesBackgrounds/background-2.webp";
+import background3 from "./CitiesBackgrounds/background-3.webp";
+import background4 from "./CitiesBackgrounds/background-4.webp";
 
 const cities = [
   {

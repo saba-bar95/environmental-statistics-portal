@@ -1,5 +1,5 @@
 import "./Footer.scss";
-import backgroundImg from "./Background/background.jpg";
+import backgroundImg from "./Background/background.webp";
 import { useParams } from "react-router-dom";
 
 const Footer = () => {
