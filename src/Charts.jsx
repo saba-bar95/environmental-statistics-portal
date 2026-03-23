@@ -361,9 +361,9 @@ const rawCharts = {
           forestResources: [
             {
               title_ge:
-                "მოჭრილი მერქნის მოცულობა, უკანონო ჭრა და ტყის განახლება საქართველოში (2013–2023)",
+                "მოჭრილი მერქნის მოცულობა, უკანონო ჭრა და ტყის განახლება საქართველოში",
               title_en:
-                "Volume of harvested timber, illegal logging and forest regeneration in Georgia (2013–2023)",
+                "Volume of harvested timber, illegal logging and forest regeneration in Georgia",
               path_ge: "ტყის რესურსები",
               path_en: "Forest Resources",
             },
@@ -814,7 +814,7 @@ const Charts = Object.fromEntries(
   Object.entries(rawCharts).map(([path, charts]) => [
     path,
     normalizeCharts(charts, path),
-  ])
+  ]),
 );
 
 export default Charts;
