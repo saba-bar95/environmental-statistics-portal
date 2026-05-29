@@ -1,0 +1,15 @@
+---
+description: Environmental Statistics Portal — project conventions for Cursor Agent
+alwaysApply: true
+---
+
+# Environmental Statistics Portal
+
+Read [AGENTS.md](../../AGENTS.md) for full agent rules. Architecture: [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md).
+
+**Quick rules:**
+- Bilingual SPA (`/ge`, `/en`); charts via per-page `chartInfo.js` + `src/chartRegistry/` — no monolithic charts file.
+- Every searchable chart: `chartID` on wrapper + `chartInfo` entry; pages use `useScrollToChartHash()`.
+- Use `ChartStateCards`, shared `Download/`, `retryKey` refetch — not full page reload.
+- Do not enable StrictMode in `main.jsx` without fixing double-fetch.
+- Preserve UI/behavior unless asked; minimal diffs; run `npm run build` after substantive changes.

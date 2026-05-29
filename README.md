@@ -1,40 +1,40 @@
-## ⚡ Project: Environmental Statistics Portal
+## Environmental Statistics Portal — Georgia Edition
 
-**Environmental Statistics Portal – Georgia Edition** is a web-based platform that aggregates and visualizes **Georgia's key environmental indicators**. Explore trends in **air quality, biodiversity, water, climate, transport emissions, energy, waste**, and more — through interactive dashboards and intuitive charts.
+Web platform that aggregates and visualizes **Georgia's key environmental indicators**: air quality, biodiversity, water, climate, transport emissions, energy, waste, and more — through interactive dashboards and charts.
 
-Built for **policymakers, researchers, and the public**, it delivers **data-driven insights** into Georgia's environmental performance in a clean, accessible format.
-
----
-
-## ✨ Features
-
-- 🔍 **Smart search** – find any indicator instantly
-- 📊 **Interactive visualizations** powered by Recharts, ApexCharts, and AMCharts5
-- 🗺️ **Geographic maps** – interactive regional breakdowns via AMCharts5 + Leaflet
-- 🗂️ **Thematic dashboards**: Air, Water, Climate, Energy, Waste, Biodiversity, Transport, Reports
-- 📈 **Deep breakdowns**: by resource, time-series, balance tables
-- 💾 **Export options**: PDF, Excel, JPG, PNG
-- 🌐 **Bilingual interface**: Georgian (`/ge`) | English (`/en`)
-- 📱 **Fully responsive** – seamless on mobile, tablet, desktop
+Built for **policymakers, researchers, and the public**, with a bilingual interface and exportable visuals.
 
 ---
 
-## 🖼️ Screenshot
+## Features
 
-![Dashboard Overview](overview.png)
+- **Smart search** — find indicators via the global chart registry (no need to open a page first)
+- **Interactive visualizations** — Recharts, ApexCharts, AMCharts 5
+- **Geographic maps** — AMCharts 5 + Leaflet regional views
+- **Thematic dashboards** — Air, Water, Climate, Energy, Waste, Biodiversity, Transport, Reports
+- **Exports** — PDF, Excel, JPG, PNG on supported charts
+- **Bilingual** — Georgian (`/ge`) and English (`/en`)
+- **Responsive** — mobile, tablet, and desktop
 
 ---
 
-## 🚀 Live Demo
+## Screenshot
 
-🔗 **[environment-statistics-portal.vercel.app](https://environment-statistics-portal.vercel.app/)**
-_(Toggle language in the top-right corner)_
+![Dashboard overview](overview.png)
 
 ---
 
-## 📊 Data Sources
+## Live demo
 
-All data is sourced from **official Georgian institutions**, including:
+**[environment-statistics-portal.vercel.app](https://environment-statistics-portal.vercel.app/)**
+
+Toggle language in the top-right corner.
+
+---
+
+## Data sources
+
+Official Georgian institutions, including:
 
 - [National Statistics Office of Georgia (Geostat)](https://www.geostat.ge/en)
 - [Ministry of Environmental Protection and Agriculture of Georgia](https://mepa.gov.ge/En)
@@ -42,35 +42,78 @@ All data is sourced from **official Georgian institutions**, including:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech stack
 
 | Category | Technology |
-|---|---|
-| **Framework** | [React 19](https://reactjs.org/) |
-| **Build Tool** | [Vite](https://vitejs.dev/) |
-| **Routing** | [React Router DOM v7](https://reactrouter.com/) |
-| **Styling** | [SCSS](https://sass-lang.com/) + [Tailwind CSS](https://tailwindcss.com/) |
-| **Charts** | [Recharts](https://recharts.org/), [ApexCharts](https://apexcharts.com/), [AMCharts5](https://www.amcharts.com/) |
-| **Maps** | [Leaflet](https://leafletjs.com/) + AMCharts5 Geodata |
-| **Exports** | ExcelJS, jsPDF, html2canvas, file-saver |
-| **Analytics** | [Vercel Analytics](https://vercel.com/analytics) |
-| **Deployment** | [Vercel](https://vercel.com/) |
+|----------|------------|
+| Framework | [React 19](https://react.dev/) |
+| Build | [Vite 7](https://vite.dev/) |
+| Routing | [React Router 7](https://reactrouter.com/) |
+| Styling | [Sass](https://sass-lang.com/) + [Tailwind CSS 4](https://tailwindcss.com/) |
+| Charts | [Recharts](https://recharts.org/), [ApexCharts](https://apexcharts.com/), [AMCharts 5](https://www.amcharts.com/) |
+| Maps | [Leaflet](https://leafletjs.com/) + AMCharts geodata |
+| Exports | ExcelJS, jsPDF, html2canvas, file-saver |
+| Analytics | [Vercel Analytics](https://vercel.com/analytics) |
+| Hosting | [Vercel](https://vercel.com/) |
 
 ---
 
-## 🔧 Getting Started Locally
+## Getting started
 
 ```bash
 git clone https://github.com/saba-bar95/environment.git
-cd environment
+cd environment   # or your clone folder name
 npm install
 npm run dev
 ```
 
-App runs at **http://localhost:3000**
+Open **http://localhost:3000** (Vite default in `vite.config.js`).
+
+Other commands:
+
+```bash
+npm run build          # production build
+npm run preview        # preview dist/
+npm run lint           # ESLint
+npm run audit:charts   # chart registry / ID audit
+```
 
 ---
 
-### 👨‍💻 Author
+## Documentation
 
-[Saba Barbakadze – GitHub Profile](https://github.com/saba-bar95)
+| Document | Description |
+|----------|-------------|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Routing, chart registry, search, downloads, build |
+| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Conventions, checklists, scripts |
+| [AGENTS.md](AGENTS.md) | Cursor Agent guidelines |
+| [src/chartRegistry/README.md](src/chartRegistry/README.md) | Chart registry quick reference |
+
+The `.github/` folder is reserved for GitHub Actions and templates; see [.github/README.md](.github/README.md).
+
+---
+
+## Project structure (summary)
+
+```
+src/
+  main.jsx              # RouterProvider bootstrap
+  routes.jsx            # Lazy-loaded page routes
+  App.jsx               # Header, Footer, Outlet
+  chartRegistry/        # Global search index from chartInfo.js files
+  hooks/                # Scroll-to-chart, fetch helpers
+  assets/
+    components/Pages/   # Dashboard pages + chartInfo.js per section
+    components/ChartCard/   # Shared loading/error/tooltip UI
+    components/Download/    # Shared export helpers
+    fetchFunctions/     # Data API wrappers
+    styles/             # Global SCSS
+scripts/                # Audit and maintenance codemods
+docs/                   # Architecture and development guides
+```
+
+---
+
+## Author
+
+[Saba Barbakadze](https://github.com/saba-bar95)
