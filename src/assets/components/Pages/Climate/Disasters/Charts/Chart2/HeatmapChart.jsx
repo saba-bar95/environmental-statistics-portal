@@ -1,9 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import commonData from "../../../../../../fetchFunctions/commonData";
 import Download from "./Download/Download";
 import Svg from "./Svg";
-import "./HeatmapChart.scss";
+import "../../../../../../styles/HeatmapChart.scss";
+import {
+  ChartLoadingCard,
+  ChartErrorCard,
+  ChartEmptyCard,
+} from "../../../../../ChartCard/ChartStateCards";
 
 /** Finds a specific variable (e.g., Year, Month) from the metadata array. */
 function findVariable(vars = [], candidates = []) {
@@ -29,6 +34,11 @@ const HydroHazardsHeatmap = ({ chartInfo, columnWidth = 140 }) => {
   const [error, setError] = useState(null);
   const [rawMeta, setRawMeta] = useState(null);
   const [rawData, setRawData] = useState(null);
+  const [retryKey, setRetryKey] = useState(0);
+  const retry = useCallback(() => setRetryKey((k) => k + 1), []);
+
+  const title = language === "ge" ? chartInfo.title_ge : chartInfo.title_en;
+  const unit = language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en;
 
   // Fetch and process data
   useEffect(() => {
@@ -53,7 +63,7 @@ const HydroHazardsHeatmap = ({ chartInfo, columnWidth = 140 }) => {
     };
 
     getData();
-  }, [language, chartInfo]);
+  }, [language, chartInfo, retryKey]);
 
   // Process data
   const { years, months, matrix } = useMemo(() => {
@@ -131,106 +141,38 @@ const HydroHazardsHeatmap = ({ chartInfo, columnWidth = 140 }) => {
     return data;
   }, [hasData, months, years, matrix, language]);
 
-  // Show loading state
   if (isLoading) {
     return (
-      <div className="chart-wrapper" id={chartInfo.chartID}>
-        <div className="header">
-          <div className="right">
-            <div className="ll"></div>
-            <div className="rr">
-              <h1>
-                {language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
-              </h1>
-              <p>{language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}</p>
-            </div>
-          </div>
-          <div className="left">
-            <div className="download-placeholder">
-              <span className="loading-spinner"></span>
-              <span>{language === "ge" ? "ჩატვირთვა..." : "Loading..."}</span>
-            </div>
-          </div>
-        </div>
-        <div className="loading-container">
-          <div className="loading-content">
-            <div className="spinner"></div>
-            <p>
-              {language === "ge"
-                ? "მონაცემების ჩატვირთვა..."
-                : "Loading data..."}
-            </p>
-          </div>
-        </div>
-      </div>
+      <ChartLoadingCard
+        id={chartInfo.chartID}
+        title={title}
+        unit={unit}
+        language={language}
+      />
     );
   }
 
-  // Show error state
   if (error) {
     return (
-      <div className="chart-wrapper" id={chartInfo.chartID}>
-        <div className="header">
-          <div className="right">
-            <div className="ll"></div>
-            <div className="rr">
-              <h1>
-                {language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
-              </h1>
-              <p>{language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}</p>
-            </div>
-          </div>
-          <div className="left">
-            <button
-              className="retry-btn"
-              onClick={() => window.location.reload()}>
-              {language === "ge" ? "ხელახლა ცდა" : "Retry"}
-            </button>
-          </div>
-        </div>
-        <div className="error-container">
-          <div className="error-content">
-            <div className="error-icon">⚠️</div>
-            <p>{error}</p>
-            <button
-              className="retry-btn"
-              onClick={() => window.location.reload()}>
-              {language === "ge" ? "ხელახლა ჩატვირთვა" : "Reload Chart"}
-            </button>
-          </div>
-        </div>
-      </div>
+      <ChartErrorCard
+        id={chartInfo.chartID}
+        title={title}
+        unit={unit}
+        language={language}
+        error={error}
+        onRetry={retry}
+      />
     );
   }
 
-  // Show empty state if no data
   if (!hasData) {
     return (
-      <div className="chart-wrapper" id={chartInfo.chartID}>
-        <div className="header">
-          <div className="right">
-            <div className="ll"></div>
-            <div className="rr">
-              <h1>
-                {language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
-              </h1>
-              <p>{language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}</p>
-            </div>
-          </div>
-          <div className="left">
-            <div className="download-placeholder">
-              {language === "ge"
-                ? "მონაცემები არ მოიძებნა"
-                : "No data to download"}
-            </div>
-          </div>
-        </div>
-        <div className="empty-state">
-          <p>
-            {language === "ge" ? "მონაცემები არ მოიძებნა" : "No data available"}
-          </p>
-        </div>
-      </div>
+      <ChartEmptyCard
+        id={chartInfo.chartID}
+        title={title}
+        unit={unit}
+        language={language}
+      />
     );
   }
 

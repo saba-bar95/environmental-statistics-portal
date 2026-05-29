@@ -1,27 +1,18 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
 import { useEffect } from "react";
 import LineCharts from "./Charts/LineCharts";
 import PieCharts from "./Charts/PieCharts";
 import AreaCharts from "./Charts/AreaCharts";
-import Charts from "../../../../Charts";
+import { transportChartInfo } from "./chartInfo.js";
 import CompromisedCharts from "./Charts/CompromisedCharts";
 import LineChartsWithTwoApiCalls from "./Charts/LineChartsWithTwoApiCalls";
 
 const Transport = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.transport;
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]); // Re-run when the hash changes
+  const info = transportChartInfo;
+  useScrollToChartHash();
 
   const ChartInfo = [
     {

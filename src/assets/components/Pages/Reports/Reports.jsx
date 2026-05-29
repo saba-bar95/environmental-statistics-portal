@@ -1,6 +1,7 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../Charts";
+import { reportsChartInfo } from "./chartInfo.js";
 import { useEffect } from "react";
 import LineCharts from "./Charts/LineCharts";
 import BarCharts from "./Charts/BarCharts";
@@ -11,18 +12,8 @@ import BarChartsWithYears from "./Charts/BarChartsWithYears";
 
 const Reports = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.reports;
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]); // Re-run when the hash changes
+  const info = reportsChartInfo;
+  useScrollToChartHash();
 
   const ChartInfo = [
     {

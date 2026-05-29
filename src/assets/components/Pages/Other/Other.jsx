@@ -1,7 +1,8 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
 import { useEffect } from "react";
-import Charts from "../../../../Charts";
+import { otherChartInfo } from "./chartInfo.js";
 import LineChart1 from "./Charts/LineCharts";
 import AreaCharts from "./Charts/AreaCharts";
 import StackedBarCharts from "./Charts/StackedBarCharts";
@@ -11,18 +12,8 @@ import Fertilizer from "./Svgs/Fertilizer";
 
 const Waste = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.other;
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]); // Re-run when the hash changes
+  const info = otherChartInfo;
+  useScrollToChartHash();
 
   const ChartInfo = [
     {

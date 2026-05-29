@@ -1,7 +1,7 @@
-import { useParams, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../Charts";
+import { airChartInfo } from "./chartInfo.js";
 import Chart1 from "./Charts/Chart1/Chart1";
 import Chart2 from "./Charts/Chart2/Chart2";
 import Chart3 from "./Charts/Chart3/Chart3";
@@ -10,18 +10,7 @@ import Quality from "./Quality/Quality";
 
 const Air = () => {
   const { language } = useParams();
-  const location = useLocation(); // Get the current location to access hash
-
-  // Scroll to the chart specified in the URL hash
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]); // Re-run when the hash changes
+  useScrollToChartHash();
 
   return (
     <div className="section-container">
@@ -45,9 +34,9 @@ const Air = () => {
       <div className="charts-section">
         <Quality />
         <div className="chart-container">
-          <Chart1 chartInfo={Charts.air[0]} />
-          <Chart2 chartInfo={Charts.air[1]} />
-          <Chart3 chartInfo={Charts.air[2]} />
+          <Chart1 chartInfo={airChartInfo[0]} />
+          <Chart2 chartInfo={airChartInfo[1]} />
+          <Chart3 chartInfo={airChartInfo[2]} />
         </div>
       </div>
       <Footer />

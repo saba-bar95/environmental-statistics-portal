@@ -4,7 +4,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import * as am5geodata_georgiaHigh from "@amcharts/amcharts5-geodata/georgiaLow";
 import commonData from "../../../../../fetchFunctions/commonData";
-import "./GeorgiaMap.scss";
+import "../../../../../styles/GeorgiaMap.scss";
 
 const GeorgiaMap = ({ selectedYear = 2023, selectedSubstance = null }) => {
   const { language } = useParams();

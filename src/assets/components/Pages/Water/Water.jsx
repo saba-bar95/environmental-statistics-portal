@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import backgroundImg from "./Background/background.webp";
 import Children from "./Children/Children";
 import Arrow from "./Svg/Arrow";
+import { text as heroText } from "./Texts/heroText.js";
 
 const Water = () => {
   const { language } = useParams();
@@ -14,17 +15,8 @@ const Water = () => {
           backgroundImage: `url(${backgroundImg})`,
         }}>
         <div className="overlay"></div> {/* New overlay div */}
-        <h1>
-          {language === "en"
-            ? "Water and Biodiversity"
-            : "წყლის რესურსები და გამოყენება"}
-        </h1>
-        <h2>
-          {" "}
-          {language === "en"
-            ? "Georgia's water supply, household water consumption, wastewater treatment and water losses"
-            : "საქართველოს წყალმომარაგება, შინამეურნეობების მიერ წყლის მოხმარება, ჩამდინარე წყლების გაწმენდა და წყლის დანაკარგები"}{" "}
-        </h2>
+        <h1>{heroText[language].header1}</h1>
+        <h2>{heroText[language].header2}</h2>
       </div>
       <div className="children-container">
         <div className="wrapper">

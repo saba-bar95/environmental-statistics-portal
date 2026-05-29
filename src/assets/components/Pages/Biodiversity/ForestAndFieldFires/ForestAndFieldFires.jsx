@@ -1,22 +1,12 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../../Charts";
+import { forestAndFieldFiresChartInfo } from "./chartInfo.js";
 import Chart1 from "./Charts/Chart1/Chart1";
-import { useEffect } from "react";
 
 const ForestAndFieldFires = () => {
   const { language } = useParams();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]);
+  useScrollToChartHash();
 
   return (
     <div className="section-container">
@@ -40,7 +30,7 @@ const ForestAndFieldFires = () => {
       </div>
       <div className="charts-section">
         <div className="chart-container">
-          <Chart1 chartInfo={Charts.biodiversity[2].forestandfieldfires[0]} />
+          <Chart1 chartInfo={forestAndFieldFiresChartInfo[0]} />
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@
   border-radius: 24px;
   outline: none;
   box-sizing: border-box; /* Ensure padding is included in width calculations */
+  scroll-margin-top: 120px; /* Clear sticky header when scrolling via search #hash */
 
   .recharts-brush {
     transform: translateY(10px);

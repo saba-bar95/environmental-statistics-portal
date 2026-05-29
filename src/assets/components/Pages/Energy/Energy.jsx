@@ -1,4 +1,5 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
 import { useEffect } from "react";
 import LineCharts from "./Charts/LineCharts";
@@ -7,22 +8,12 @@ import AreaCharts from "./Charts/AreaCharts";
 import StackedBarChartsWithPercents from "./Charts/StackedBarChartsWithPercents";
 import PositiveAndNegativeBarChart from "./Charts/PositiveAndNegativeBarChart";
 import LineGridChart from "./Charts/LineGridChart";
-import Charts from "../../../../Charts";
+import { energyChartInfo } from "./chartInfo.js";
 
 const Energy = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.energy;
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]); // Re-run when the hash changes
+  const info = energyChartInfo;
+  useScrollToChartHash();
 
   const ChartInfo = [
     {

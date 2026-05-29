@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import downloadPNG from "../../../../../Download/downloadPNG";
 import downloadJPG from "../../../../../Download/downloadJPG";
-import downloadExcel from "./downloadExcel";
+import downloadExcel from "../../../../../Download/downloadExcel.bbd42130";
 import downloadPDF from "./downloadPDF";
 import Dots from "../../../../../Download/Svgs/Dots";
 import Excel from "../../../../../Download/Svgs/Excel";

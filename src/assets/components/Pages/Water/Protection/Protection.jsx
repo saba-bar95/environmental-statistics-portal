@@ -1,16 +1,17 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../hooks/useScrollToChartHash.js";
 import { useEffect, useState } from "react";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../../Charts";
+import { protectionChartInfo } from "./chartInfo.js";
 import LineChart1 from "./Charts/LineCharts";
 import AreaCharts from "./Charts/AreaCharts";
 import PieChartComponent from "./Charts/PieCharts";
 
 const Protection = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.water[1].protection;
+  const info = protectionChartInfo;
   const [width, setWidth] = useState(window.innerWidth);
+  useScrollToChartHash();
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,16 +23,6 @@ const Protection = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [width]);
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]); // Re-run when the hash changes
 
   const ChartInfo = [
     {

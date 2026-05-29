@@ -13,6 +13,11 @@ import {
 import { useParams } from "react-router-dom";
 import commonData from "../../../../../../fetchFunctions/commonData";
 import Download from "./Download/Download";
+import {
+  ChartLoadingCard,
+  ChartErrorCard,
+  ChartEmptyCard,
+} from "../../../../../ChartCard/ChartStateCards";
 
 const ScatterCharts = ({ chartInfo }) => {
   const { language } = useParams();
@@ -61,72 +66,25 @@ const ScatterCharts = ({ chartInfo }) => {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="chart-wrapper" id={chartInfo.chartID}>
-        <div className="header">
-          <div className="right">
-            <div className="ll"></div>
-            <div className="rr">
-              <h1>
-                {language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
-              </h1>
-              <p>{language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}</p>
-            </div>
-          </div>
-          <div className="left">
-            <div className="download-placeholder">
-              <span className="loading-spinner"></span>
-              <span>{language === "ge" ? "ჩატვირთვა..." : "Loading..."}</span>
-            </div>
-          </div>
-        </div>
-        <div className="loading-container">
-          <div className="loading-content">
-            <div className="spinner"></div>
-            <p>
-              {language === "ge"
-                ? "მონაცემების ჩატვირთვა..."
-                : "Loading data..."}
-            </p>
-          </div>
-        </div>
-      </div>
+      <ChartLoadingCard
+        id={chartInfo.chartID}
+        title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
+        unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
+        language={language}
+      />
     );
   }
 
   // Show error state
   if (error) {
     return (
-      <div className="chart-wrapper" id={chartInfo.chartID}>
-        <div className="header">
-          <div className="right">
-            <div className="ll"></div>
-            <div className="rr">
-              <h1>
-                {language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
-              </h1>
-              <p>{language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}</p>
-            </div>
-          </div>
-          <div className="left">
-            <button
-              className="retry-btn"
-              onClick={() => window.location.reload()}>
-              {language === "ge" ? "ხელახლა ცდა" : "Retry"}
-            </button>
-          </div>
-        </div>
-        <div className="error-container">
-          <div className="error-content">
-            <div className="error-icon">⚠️</div>
-            <p>{error}</p>
-            <button
-              className="retry-btn"
-              onClick={() => window.location.reload()}>
-              {language === "ge" ? "ხელახლა ჩატვირთვა" : "Reload Chart"}
-            </button>
-          </div>
-        </div>
-      </div>
+      <ChartErrorCard
+        id={chartInfo.chartID}
+        title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
+        unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
+        language={language}
+        error={error}
+      />
     );
   }
 
@@ -221,31 +179,13 @@ const ScatterCharts = ({ chartInfo }) => {
   // Show empty state if no data
   if (chartData.length === 0) {
     return (
-      <div className="chart-wrapper" id={chartInfo.chartID}>
-        <div className="header">
-          <div className="right">
-            <div className="ll"></div>
-            <div className="rr">
-              <h1>
-                {language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
-              </h1>
-              <p>{language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}</p>
-            </div>
-          </div>
-          <div className="left">
-            <div className="download-placeholder">
-              {language === "ge"
-                ? "მონაცემები არ მოიძებნა"
-                : "No data to download"}
-            </div>
-          </div>
-        </div>
-        <div className="empty-state">
-          <p>
-            {language === "ge" ? "მონაცემები არ მოიძებნა" : "No data available"}
-          </p>
-        </div>
-      </div>
+      <ChartEmptyCard
+        id={chartInfo.chartID}
+        title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
+        unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
+        language={language}
+        style={chartInfo?.wrapperStyles}
+      />
     );
   }
 

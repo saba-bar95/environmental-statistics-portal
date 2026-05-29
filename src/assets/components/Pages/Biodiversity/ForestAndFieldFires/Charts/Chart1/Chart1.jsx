@@ -6,6 +6,10 @@ import YearDropdown from "../../../../../YearDropdown/YearDropdown";
 import Download from "../Download/Download";
 import GeorgiaMap from "../../GeorgiaMap/GeorgiaMap";
 import "../../../../../../../assets/styles/SpinnerAndError.scss";
+import {
+  ChartLoadingCard,
+  ChartErrorCard,
+} from "../../../../../ChartCard/ChartStateCards";
 
 const Chart1 = ({ chartInfo }) => {
   const { language } = useParams();
@@ -318,78 +322,29 @@ const Chart1 = ({ chartInfo }) => {
   // Show loading state
   if (isLoading) {
     return (
-      <div
-        className="chart-wrapper"
+      <ChartLoadingCard
         id={chartInfo.id}
-        style={{ minWidth: "1000px" }}>
-        <div className="header">
-          <div className="right">
-            <div className="ll">
-              <Svg />
-            </div>
-            <div className="rr">
-              <h1>{language === "ge" ? info.title_ge : info.title_en}</h1>
-              <p>{language === "ge" ? info.unit_ge : info.unit_en}</p>
-            </div>
-          </div>
-          <div className="left">
-            <div className="download-placeholder">
-              <span className="loading-spinner"></span>
-              <span>{language === "ge" ? "ჩატვირთვა..." : "Loading..."}</span>
-            </div>
-          </div>
-        </div>
-        <div className="loading-container">
-          <div className="loading-content">
-            <div className="spinner"></div>
-            <p>
-              {language === "ge"
-                ? "მონაცემების ჩატვირთვა..."
-                : "Loading data..."}
-            </p>
-          </div>
-        </div>
-      </div>
+        title={language === "ge" ? info.title_ge : info.title_en}
+        unit={language === "ge" ? info.unit_ge : info.unit_en}
+        language={language}
+        icon={<Svg />}
+        style={{ minWidth: "1000px" }}
+      />
     );
   }
 
   // Show error state
   if (error) {
     return (
-      <div
-        className="chart-wrapper"
+      <ChartErrorCard
         id={chartInfo.id}
-        style={{ minWidth: "1000px" }}>
-        <div className="header">
-          <div className="right">
-            <div className="ll">
-              <Svg />
-            </div>
-            <div className="rr">
-              <h1>{language === "ge" ? info.title_ge : info.title_en}</h1>
-              <p>{language === "ge" ? info.unit_ge : info.unit_en}</p>
-            </div>
-          </div>
-          <div className="left">
-            <button
-              className="retry-btn"
-              onClick={() => window.location.reload()}>
-              {language === "ge" ? "ხელახლა ცდა" : "Retry"}
-            </button>
-          </div>
-        </div>
-        <div className="error-container">
-          <div className="error-content">
-            <div className="error-icon">⚠️</div>
-            <p>{error}</p>
-            <button
-              className="retry-btn"
-              onClick={() => window.location.reload()}>
-              {language === "ge" ? "ხელახლა ჩატვირთვა" : "Reload Chart"}
-            </button>
-          </div>
-        </div>
-      </div>
+        title={language === "ge" ? info.title_ge : info.title_en}
+        unit={language === "ge" ? info.unit_ge : info.unit_en}
+        language={language}
+        icon={<Svg />}
+        style={{ minWidth: "1000px" }}
+        error={error}
+      />
     );
   }
 

@@ -1,4 +1,5 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../hooks/useScrollToChartHash.js";
 import { useRef, useEffect, useState } from "react";
 import backgroundImg from "./Background/background.webp";
 import "./SupplyAndLosses.scss";
@@ -7,8 +8,8 @@ import image1 from "./images/image-1.png";
 import image2 from "./images/image-2.png";
 import image3 from "./images/image-3.png";
 import Clean from "./Svgs/Clean";
-import "./SupplyAndLosses2.scss";
-import Charts from "../../../../../Charts";
+import "./supply-and-losses-page.scss";
+import { supplyAndLossesChartInfo } from "./chartInfo.js";
 import LineCharts from "./Charts/LineCharts";
 import StackedBarCharts from "./Charts/StackedBarCharts";
 import BarCharts from "./Charts/BarCharts";
@@ -17,11 +18,11 @@ import LineChartBoth from "./Charts/LineChartBoth";
 
 const SupplyAndLosses = () => {
   const { language } = useParams();
-  const location = useLocation(); // Get the current location to access hash
+  useScrollToChartHash();
 
   const wave1Ref = useRef(null);
   const [waveHeight, setWaveHeight] = useState(0);
-  const info = Charts.water[2].supplyandlosses;
+  const info = supplyAndLossesChartInfo;
 
   useEffect(() => {
     const waveElement = wave1Ref.current;
@@ -51,17 +52,6 @@ const SupplyAndLosses = () => {
       }
     };
   }, []);
-
-  // Scroll to the chart specified in the URL hash
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]); // Re-run when the hash changes
 
   const ChartInfo = [
     {

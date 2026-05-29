@@ -1,25 +1,16 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../../hooks/useScrollToChartHash.js";
 import { useEffect } from "react";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../../../Charts";
+import { forestResourcesChartInfo } from "./chartInfo.js";
 import Chart1 from "./Charts/Chart1/Chart1";
 import SankeyChart from "./Charts/Sankey/SankeyChart";
 import SankeyChart2 from "./Charts/Sankey/SankeyChart2";
 
 const ForestResources = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.biodiversity[1].forestarea[0].forestResources;
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]);
+  const info = forestResourcesChartInfo;
+  useScrollToChartHash();
 
   const ChartInfo = [
     {},

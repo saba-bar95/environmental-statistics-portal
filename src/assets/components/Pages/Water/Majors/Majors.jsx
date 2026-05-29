@@ -1,16 +1,16 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../hooks/useScrollToChartHash.js";
 import { useEffect, useState } from "react";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../../Charts";
+import { majorsChartInfo } from "./chartInfo.js";
 import Chart1 from "./Charts/Chart1/Chart1";
 import Chart2 from "./Charts/Chart2/Chart2";
 
 const Majors = () => {
   const { language } = useParams();
-  const location = useLocation();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useScrollToChartHash();
 
-  // Update windowWidth on resize
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -20,19 +20,8 @@ const Majors = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Scroll to chart if hash exists
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]);
-
-  const info1 = Charts.water[0].majors[0];
-  const info2 = Charts.water[0].majors[1];
+  const info1 = majorsChartInfo[0];
+  const info2 = majorsChartInfo[1];
 
   // Set chart-container width based on window size
   const chartContainerWidth = windowWidth < 768 ? "100%" : "80%";

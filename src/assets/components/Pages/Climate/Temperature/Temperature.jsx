@@ -1,6 +1,7 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../../Charts";
+import { temperatureChartInfo } from "./chartInfo.js";
 import { useEffect } from "react";
 import AreaChartsWithLine from "./Charts/Chart1/AreaChartsWithLine";
 import BarCharts from "./Charts/Chart2/Chart1";
@@ -11,18 +12,8 @@ import BarChartsHorizontal from "./Charts/Chart6/BarChartsHorizontal";
 
 const Temperature = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.climate[1].temperature;
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]);
+  const info = temperatureChartInfo;
+  useScrollToChartHash();
 
   const ChartInfo = [
     {

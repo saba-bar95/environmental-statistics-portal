@@ -1,16 +1,25 @@
-import { useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import { Treemap, Tooltip, ResponsiveContainer } from "recharts";
 import Svg from "./Svg";
 import { useParams } from "react-router-dom";
 import Download from "../Download/Download";
 import riversAndLakes from "../../../../../../fetchFunctions/riversAndLakes";
 import Info from "../../../../../Info/Info";
+import {
+  ChartLoadingCard,
+  ChartErrorCard,
+  ChartEmptyCard,
+} from "../../../../../ChartCard/ChartStateCards";
 
 const Chart2 = ({ chartInfo }) => {
   const { language } = useParams();
   const [chartData, setChartData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
-  const [error, setError] = useState(null); // Add error state
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [retryKey, setRetryKey] = useState(0);
+  const retry = useCallback(() => setRetryKey((k) => k + 1), []);
+  const wrapperStyle = { height: "700px", width: "100%", margin: "auto" };
+  const titleStyle = { width: "100%" };
 
   const info = useMemo(
     () => ({
@@ -40,6 +49,8 @@ const Chart2 = ({ chartInfo }) => {
     }),
     [chartInfo]
   );
+
+  const titleStr = language === "ge" ? info.title_ge : info.title_en;
 
   useEffect(() => {
     const getData = async () => {
@@ -74,125 +85,68 @@ const Chart2 = ({ chartInfo }) => {
     };
 
     getData();
-  }, [info, language]);
+  }, [info, language, retryKey]);
 
-  // Show loading state
+  const headerLeftLoading = (
+    <>
+      <Info text={false} />
+      <div className="download-placeholder">
+        <span className="loading-spinner"></span>
+        <span>{language === "ge" ? "ჩატვირთვა..." : "Loading..."}</span>
+      </div>
+    </>
+  );
+
   if (isLoading) {
     return (
-      <div
-        className="chart-wrapper"
+      <ChartLoadingCard
         id={chartInfo.chartID}
-        style={{ height: "700px", width: "100%", margin: "auto" }}>
-        <div className="header">
-          <div className="right">
-            <div className="ll">
-              <Svg />
-            </div>
-            <div className="rr">
-              <h1 style={{ width: "100%" }}>
-                {language === "ge" ? info.title_ge : info.title_en}
-              </h1>
-            </div>
-          </div>
-          <div className="left">
-            <Info text={false} />
-            <div className="download-placeholder">
-              <span className="loading-spinner"></span>
-              <span>{language === "ge" ? "ჩატვირთვა..." : "Loading..."}</span>
-            </div>
-          </div>
-        </div>
-        <div className="loading-container">
-          <div className="loading-content">
-            <div className="spinner"></div>
-            <p>
-              {language === "ge"
-                ? "მონაცემების ჩატვირთვა..."
-                : "Loading lake data..."}
-            </p>
-          </div>
-        </div>
-      </div>
+        title={titleStr}
+        language={language}
+        icon={<Svg />}
+        style={wrapperStyle}
+        titleStyle={titleStyle}
+        hideUnit
+        loadingMessage={
+          language === "ge" ? "მონაცემების ჩატვირთვა..." : "Loading lake data..."
+        }
+        headerLeft={headerLeftLoading}
+      />
     );
   }
 
-  // Show error state
   if (error) {
     return (
-      <div
-        className="chart-wrapper"
+      <ChartErrorCard
         id={chartInfo.chartID}
-        style={{ height: "700px", width: "100%", margin: "auto" }}>
-        <div className="header">
-          <div className="right">
-            <div className="ll">
-              <Svg />
-            </div>
-            <div className="rr">
-              <h1 style={{ width: "100%" }}>
-                {language === "ge" ? info.title_ge : info.title_en}
-              </h1>
-            </div>
-          </div>
-          <div className="left">
-            <Info text={false} />
-            <button
-              className="retry-btn"
-              onClick={() => window.location.reload()}>
-              {language === "ge" ? "ხელახლა ცდა" : "Retry"}
-            </button>
-          </div>
-        </div>
-        <div className="error-container">
-          <div className="error-content">
-            <div className="error-icon">⚠️</div>
-            <p>{error}</p>
-            <button
-              className="retry-btn"
-              onClick={() => window.location.reload()}>
-              {language === "ge" ? "ხელახლა ჩატვირთვა" : "Reload Chart"}
-            </button>
-          </div>
-        </div>
-      </div>
+        title={titleStr}
+        language={language}
+        error={error}
+        icon={<Svg />}
+        style={wrapperStyle}
+        titleStyle={titleStyle}
+        hideUnit
+        headerLeft={<Info text={false} />}
+        onRetry={retry}
+      />
     );
   }
 
-  // Show empty state if no data
   if (!chartData?.data?.lakes || chartData.data.lakes.length === 0) {
     return (
-      <div
-        className="chart-wrapper"
+      <ChartEmptyCard
         id={chartInfo.chartID}
-        style={{ height: "700px", width: "100%", margin: "auto" }}>
-        <div className="header">
-          <div className="right">
-            <div className="ll">
-              <Svg />
-            </div>
-            <div className="rr">
-              <h1 style={{ width: "100%" }}>
-                {language === "ge" ? info.title_ge : info.title_en}
-              </h1>
-            </div>
-          </div>
-          <div className="left">
-            <Info text={false} />
-            <div className="download-placeholder">
-              {language === "ge"
-                ? "მონაცემები არ მოიძებნა"
-                : "No data to download"}
-            </div>
-          </div>
-        </div>
-        <div className="empty-state">
-          <p>
-            {language === "ge"
-              ? "მონაცემები არ მოიძებნა"
-              : "No lake data available"}
-          </p>
-        </div>
-      </div>
+        title={titleStr}
+        language={language}
+        icon={<Svg />}
+        style={wrapperStyle}
+        titleStyle={titleStyle}
+        hideUnit
+        headerLeft={<Info text={false} />}
+        emptyMessage={
+          language === "ge" ? "მონაცემები არ მოიძებნა" : "No lake data available"
+        }
+      />
     );
   }
 

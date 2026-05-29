@@ -1,6 +1,7 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../../Charts.jsx";
+import { precipitationChartInfo } from "./chartInfo.js";
 import { useEffect } from "react";
 import AreaCharts from "./Charts/Chart1/AreaCharts.jsx";
 import PositiveAndNegativeBarChart from "./Charts/Chart2/PositiveAndNegativeBarChart.jsx";
@@ -16,18 +17,8 @@ import PrecipitationHeatmapChart from "./Charts/Chart11/HeatmapChart.jsx";
 
 const Precipitation = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.climate[2].precipitation;
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]);
+  const info = precipitationChartInfo;
+  useScrollToChartHash();
 
   const ChartInfo = [
     {

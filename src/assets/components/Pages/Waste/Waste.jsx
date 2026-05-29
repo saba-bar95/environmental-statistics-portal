@@ -1,9 +1,10 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
 import { useEffect } from "react";
 import Waste1 from "./Svg/Waste1";
 import Trash from "./Svg/Trash";
-import Charts from "../../../../Charts";
+import { wasteChartInfo } from "./chartInfo.js";
 import BarCharts from "../Reports/Charts/BarCharts";
 import LineChart1 from "./Charts/LineCharts";
 import CompromisedCharts from "./Charts/CompromisedCharts";
@@ -13,18 +14,8 @@ import Quality from "./Quality/Quality";
 
 const Waste = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.waste;
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]); // Re-run when the hash changes
+  const info = wasteChartInfo;
+  useScrollToChartHash();
 
   const ChartInfo = [
     {

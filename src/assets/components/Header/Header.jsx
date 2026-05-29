@@ -5,10 +5,10 @@ import sakstatLogoEn from "/src/assets/images/sakstat-logo-en.png";
 import Socials from "../Socials/Socials";
 import LanguageChanger from "../LanguageChanger/LanguageChanger";
 import "./Header.scss";
-import Navigation from "./Navigaton/Navigation";
+import Navigation from "./Navigation/Navigation";
 import Text from "./Svgs/Text";
 import { useState, useEffect } from "react";
-import SearchBar from "../SearchBar.jsx/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Header = () => {
   const { language } = useParams();
@@ -26,7 +26,7 @@ const Header = () => {
   const isEnglish = language === "en";
 
   useEffect(() => {
-    const SCROLL_THRESHOLD = 25; // Change this value to adjust sensitivity (e.g., 80, 120)
+    const SCROLL_THRESHOLD = 15; // Change this value to adjust sensitivity (e.g., 80, 120)
     let scrollBuffer = 0;
 
     const handleScroll = () => {

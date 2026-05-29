@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
-import Charts from "../../../../../Charts.jsx";
+import { disastersChartInfo } from "./chartInfo.js";
 import BarCharts from "./Charts/Chart1/Chart1.jsx";
 import DisastersHeatmapChart from "./Charts/Chart2/HeatmapChart.jsx";
 import AreaChartsWithLine from "./Charts/Chart3/AreaChartsWithLine.jsx";
@@ -14,9 +15,9 @@ import PieChartWithYears from "./Charts/Chart9/PieChartWithYears.jsx";
 
 const Disasters = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.climate[0].disasters;
+  const info = disastersChartInfo;
   const [width, setWidth] = useState(window.innerWidth);
+  useScrollToChartHash();
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,16 +29,6 @@ const Disasters = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]);
 
   const ChartInfo = [
     {

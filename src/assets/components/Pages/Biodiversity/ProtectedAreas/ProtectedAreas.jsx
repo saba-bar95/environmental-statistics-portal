@@ -1,7 +1,8 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useScrollToChartHash } from "../../../../../hooks/useScrollToChartHash.js";
 import backgroundImg from "./Background/background.webp";
 import GeoMapContainer from "./GeoMapContainer";
-import Charts from "../../../../../Charts";
+import { protectedAreasChartInfo } from "./chartInfo.js";
 import { useEffect } from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
@@ -12,9 +13,9 @@ import LineChartKurtsik from "./Charts/LineChartKurtsik";
 
 const ProtectedAreas = () => {
   const { language } = useParams();
-  const location = useLocation();
-  const info = Charts.biodiversity[0].protectedAreas;
+  const info = protectedAreasChartInfo;
   const [width, setWidth] = useState(window.innerWidth);
+  useScrollToChartHash();
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,16 +27,6 @@ const ProtectedAreas = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  useEffect(() => {
-    if (location.hash) {
-      const chartId = location.hash.replace("#", "");
-      const element = document.getElementById(chartId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [location.hash]);
 
   const ChartInfo = [
     {},
