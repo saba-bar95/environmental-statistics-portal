@@ -6,9 +6,9 @@ import Socials from "../Socials/Socials";
 import LanguageChanger from "../LanguageChanger/LanguageChanger";
 import "./Header.scss";
 import Navigation from "./Navigation/Navigation";
-import Text from "./Svgs/Text";
 import { useState, useEffect } from "react";
 import SearchBar from "../SearchBar/SearchBar";
+import { APP_TITLE } from "../../../hooks/useAppTitle";
 
 const Header = () => {
   const { language } = useParams();
@@ -71,7 +71,9 @@ const Header = () => {
                 />
               )}
             </Link>
-            {isEnglish ? <h1>Environmental Statistics Portal</h1> : <Text />}
+            <h1 className="site-title">
+              {APP_TITLE[language] ?? APP_TITLE.en}
+            </h1>
           </div>
           <SearchBar />
           <div className="left">

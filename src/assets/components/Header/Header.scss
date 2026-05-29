@@ -21,12 +21,13 @@ header {
         margin-top: 12px;
       }
 
-      h1 {
+      h1.site-title {
         font-feature-settings: "case" on;
         font-size: 15px;
+        line-height: 1.25;
         color: #132447;
-        // text-transform: uppercase;
-        width: 50%;
+        width: auto;
+        max-width: 11rem;
         font-family: FiraGOMedium;
       }
     }
