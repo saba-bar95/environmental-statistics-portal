@@ -1,5 +1,7 @@
 # `.github` directory
 
+> This file is **not** the repository homepage. GitHub shows the root [README.md](../README.md) on the repo main page.
+
 Reserved for **GitHub** configuration only (Actions workflows, issue/PR templates, Dependabot).
 
 Project documentation:

@@ -61,8 +61,8 @@ Official Georgian institutions, including:
 ## Getting started
 
 ```bash
-git clone https://github.com/saba-bar95/environment.git
-cd environment   # or your clone folder name
+git clone https://github.com/saba-bar95/environmental-statistics-portal.git
+cd environmental-statistics-portal
 npm install
 npm run dev
 ```
@@ -89,7 +89,7 @@ npm run audit:charts   # chart registry / ID audit
 | [AGENTS.md](AGENTS.md) | Cursor Agent guidelines |
 | [src/chartRegistry/README.md](src/chartRegistry/README.md) | Chart registry quick reference |
 
-The `.github/` folder is reserved for GitHub Actions and templates; see [.github/README.md](.github/README.md).
+The `.github/` folder is for GitHub Actions and templates only (not the project homepage).
 
 ---
 
