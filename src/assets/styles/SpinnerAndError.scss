@@ -1,80 +1,27 @@
 /* Loading State Styles */
 main {
-  /* Fixed chart-body height so the loading skeleton reserves exactly the same
-     space as the rendered chart (ResponsiveContainer height). This keeps the
-     page layout stable while data loads, so search/hash scroll lands precisely.
-     Charts with a non-default body height can override --chart-body-height. */
   .chart-wrapper {
-    --chart-body-height: 460px;
     display: flex;
     flex-direction: column;
     min-height: 100%;
     width: 100%;
   }
 
-  /* Let grid layouts (e.g. Protected Areas) keep two columns per row */
-  .supply-and-losses .chart-container > .chart-wrapper {
-    width: auto;
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  /* Skeleton: same height as the loaded chart on every screen size.
-     flex: none (not flex: 1) so flex-basis doesn't override the explicit
-     height inside the column flex .chart-wrapper. */
+  /* Reserve chart body height while loading (flex:1 alone collapsed in column layout) */
   .loading-container {
     flex: 0 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: var(--chart-body-height, 460px);
-    min-height: var(--chart-body-height, 460px);
-    border-radius: 12px;
+    height: 460px;
+    min-height: 460px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
     margin: 0;
     padding: 0;
-    position: relative;
-    overflow: hidden;
-    background-color: #eef1f4;
-    /* Faint chart "gridlines" + baseline so it reads as a chart placeholder */
-    background-image: repeating-linear-gradient(
-        to bottom,
-        rgba(136, 132, 216, 0.06) 0,
-        rgba(136, 132, 216, 0.06) 1px,
-        transparent 1px,
-        transparent 56px
-      ),
-      linear-gradient(
-        to top,
-        rgba(136, 132, 216, 0.18) 0,
-        rgba(136, 132, 216, 0.18) 2px,
-        transparent 2px
-      );
-  }
-
-  /* Shimmer sweep */
-  .loading-container::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background: linear-gradient(
-      90deg,
-      transparent 0,
-      rgba(255, 255, 255, 0.55) 50%,
-      transparent 100%
-    );
-    animation: chart-shimmer 1.6s ease-in-out infinite;
-  }
-
-  @keyframes chart-shimmer {
-    100% {
-      transform: translateX(100%);
-    }
   }
 
   .loading-content {
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,7 +31,6 @@ main {
     width: 100%;
     max-width: 300px;
     padding: 20px;
-    color: #6c757d;
   }
 
   .spinner {
@@ -126,12 +72,11 @@ main {
 
   /* Error State Styles */
   .error-container {
-    flex: 0 0 auto;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: var(--chart-body-height, 460px);
-    min-height: var(--chart-body-height, 460px);
+    height: 460px;
     background-color: #fff5f5;
     border: 1px solid #fed7d7;
     border-radius: 8px;
@@ -178,12 +123,11 @@ main {
 
   /* Empty State Styles */
   .empty-state {
-    flex: 0 0 auto;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: var(--chart-body-height, 460px);
-    min-height: var(--chart-body-height, 460px);
+    height: 460px;
     background-color: #f8f9fa;
     border-radius: 8px;
     color: #6c757d;
@@ -194,14 +138,13 @@ main {
     width: 100%;
   }
 
-  /* Header Centering */
-
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    /* Keep the skeleton height equal to the rendered chart (fixed 460px) so the
-       page does not jump when data loads. Only tweak inner spacing. */
+    .loading-container,
     .error-container,
     .empty-state {
+      height: 400px;
+      min-height: 400px;
       padding: 16px;
     }
 
@@ -229,6 +172,13 @@ main {
   }
 
   @media (max-width: 480px) {
+    .loading-container,
+    .error-container,
+    .empty-state {
+      height: 350px;
+      min-height: 350px;
+    }
+
     .loading-content,
     .error-content {
       max-width: 250px;
