@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import commonData from "../../../../../../fetchFunctions/commonData";
-import Download from "./Download/Download";
+import Download from "../../Download/HeatmapDownload";
 import Svg from "./Svg";
 import "../../../../../../styles/HeatmapChart.scss";
 import {

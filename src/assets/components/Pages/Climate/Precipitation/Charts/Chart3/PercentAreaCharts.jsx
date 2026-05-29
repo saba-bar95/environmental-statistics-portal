@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { useParams } from "react-router-dom";
 import commonData from "../../../../../../fetchFunctions/commonData";
-import Download from "./Download/Download";
+import Download from "../../Download";
 import {
   ChartLoadingCard,
   ChartErrorCard,

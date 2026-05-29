@@ -1,42 +1,37 @@
-import "../../../../../../Download/Download.scss";
+import "../../../../Download/Download.scss";
 import { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import downloadPNG from "../../../../../../Download/downloadPNG";
-import downloadJPG from "../../../../../../Download/downloadJPG";
-import downloadExcel from "../../../../../../Download/downloadExcel";
-import downloadPDF from "./downloadPDF";
-import Dots from "../../../../../../Download/Svgs/Dots";
-import Excel from "../../../../../../Download/Svgs/Excel";
-import PDF from "../../../../../../Download/Svgs/PDF";
-import JPG from "../../../../../../Download/Svgs/JPG";
-import PNG from "../../../../../../Download/Svgs/PNG";
+import downloadPNG from "../../../../Download/downloadPNG";
+import downloadJPG from "../../../../Download/downloadJPG";
+import downloadExcel from "../../../../Download/downloadExcel";
+import downloadPDF from "./horizontalBarPDF";
+import Dots from "../../../../Download/Svgs/Dots";
+import Excel from "../../../../Download/Svgs/Excel";
+import PDF from "../../../../Download/Svgs/PDF";
+import JPG from "../../../../Download/Svgs/JPG";
+import PNG from "../../../../Download/Svgs/PNG";
 
-const Download = ({ data, filename, unit, isPieChart, bcwy, year }) => {
+const HorizontalBarDownload = ({
+  data,
+  filename,
+  unit,
+  isPieChart,
+  bcwy,
+  year,
+}) => {
   const [open, setOpen] = useState(false);
-  const dropdownRef = useRef(null); // Create a ref for the dropdown
+  const dropdownRef = useRef(null);
   const { language } = useParams();
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (event.target.closest(".svg-container")) {
-        return;
-      }
+      if (event.target.closest(".svg-container")) return;
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpen(false);
       }
     };
-
-    // Attach the event listener
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const selected = open ? "selected" : "";
@@ -44,10 +39,10 @@ const Download = ({ data, filename, unit, isPieChart, bcwy, year }) => {
   return (
     <div className="download-container">
       <div
-        className={`svg-container ${selected}`} // Apply the selected class conditionally
+        className={`svg-container ${selected}`}
         onClick={(event) => {
           event.stopPropagation();
-          handleToggle();
+          setOpen((prev) => !prev);
         }}>
         <Dots />
       </div>
@@ -57,7 +52,6 @@ const Download = ({ data, filename, unit, isPieChart, bcwy, year }) => {
             <div
               className="wrapper"
               onClick={() => {
-                console.log("Excel download clicked, data:", data); // Debug log
                 downloadExcel(
                   data,
                   filename,
@@ -67,7 +61,7 @@ const Download = ({ data, filename, unit, isPieChart, bcwy, year }) => {
                   language,
                   year
                 );
-                setOpen(false); // Close dropdown
+                setOpen(false);
               }}>
               <Excel />
               <p>Excel</p>
@@ -75,7 +69,6 @@ const Download = ({ data, filename, unit, isPieChart, bcwy, year }) => {
             <div
               className="wrapper"
               onClick={() => {
-                console.log("PDF download clicked, data:", data); // Debug log
                 downloadPDF(
                   data,
                   filename,
@@ -85,19 +78,19 @@ const Download = ({ data, filename, unit, isPieChart, bcwy, year }) => {
                   language,
                   year
                 );
-                setOpen(false); // Close dropdown
+                setOpen(false);
               }}>
               <PDF />
               <p>PDF</p>
             </div>
           </div>
-          <div className="divider"></div>
+          <div className="divider" />
           <div className="lower">
             <div
               className="wrapper"
               onClick={(e) => {
                 downloadJPG(e);
-                setOpen(false); // Close dropdown
+                setOpen(false);
               }}>
               <JPG />
               <p>JPG</p>
@@ -106,7 +99,7 @@ const Download = ({ data, filename, unit, isPieChart, bcwy, year }) => {
               className="wrapper"
               onClick={(e) => {
                 downloadPNG(e);
-                setOpen(false); // Close dropdown
+                setOpen(false);
               }}>
               <PNG />
               <p>PNG</p>
@@ -118,4 +111,4 @@ const Download = ({ data, filename, unit, isPieChart, bcwy, year }) => {
   );
 };
 
-export default Download;
+export default HorizontalBarDownload;
