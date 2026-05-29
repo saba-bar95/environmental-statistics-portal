@@ -97,7 +97,8 @@ const LineChartKurtsik = ({ chartInfo }) => {
   // ... (Rest of the component remains unchanged: loading, error, empty states, CustomLegend, CustomTooltip, and return JSX)
   // In CustomTooltip, it already skips nulls since payload only includes active/non-null entries
 
-  // Show loading state
+  const cardStyle = chartInfo?.wrapperStyles;
+
   if (isLoading) {
     return (
       <ChartLoadingCard
@@ -105,11 +106,11 @@ const LineChartKurtsik = ({ chartInfo }) => {
         title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
         unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
         language={language}
+        style={cardStyle}
       />
     );
   }
 
-  // Show error state
   if (error) {
     return (
       <ChartErrorCard
@@ -118,6 +119,7 @@ const LineChartKurtsik = ({ chartInfo }) => {
         unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
         language={language}
         error={error}
+        style={cardStyle}
       />
     );
   }

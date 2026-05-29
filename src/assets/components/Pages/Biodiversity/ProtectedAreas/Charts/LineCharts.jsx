@@ -94,6 +94,8 @@ const LineChart1 = ({ chartInfo }) => {
   }, [language, chartInfo]);
 
   // Show loading state
+  const cardStyle = chartInfo?.wrapperStyles;
+
   if (isLoading) {
     return (
       <ChartLoadingCard
@@ -101,11 +103,11 @@ const LineChart1 = ({ chartInfo }) => {
         title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
         unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
         language={language}
+        style={cardStyle}
       />
     );
   }
 
-  // Show error state
   if (error) {
     return (
       <ChartErrorCard
@@ -114,6 +116,7 @@ const LineChart1 = ({ chartInfo }) => {
         unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
         language={language}
         error={error}
+        style={cardStyle}
       />
     );
   }

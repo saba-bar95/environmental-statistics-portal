@@ -139,7 +139,9 @@ const VerticalBarCharts = ({ chartInfo }) => {
     }
   }, [chartData, year, visibleBars, selectedTexts, colorMap]);
 
-  // Loading state
+  const cardStyle =
+    width > 1200 ? chartInfo?.wrapperStyles : undefined;
+
   if (isLoading) {
     return (
       <ChartLoadingCard
@@ -147,11 +149,11 @@ const VerticalBarCharts = ({ chartInfo }) => {
         title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
         unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
         language={language}
+        style={cardStyle}
       />
     );
   }
 
-  // Error state
   if (error) {
     return (
       <ChartErrorCard
@@ -160,6 +162,7 @@ const VerticalBarCharts = ({ chartInfo }) => {
         unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
         language={language}
         error={error}
+        style={cardStyle}
       />
     );
   }

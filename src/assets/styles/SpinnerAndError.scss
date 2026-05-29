@@ -12,6 +12,13 @@ main {
     width: 100%;
   }
 
+  /* Let grid layouts (e.g. Protected Areas) keep two columns per row */
+  .supply-and-losses .chart-container > .chart-wrapper {
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+  }
+
   /* Skeleton: same height as the loaded chart on every screen size.
      flex: none (not flex: 1) so flex-basis doesn't override the explicit
      height inside the column flex .chart-wrapper. */
