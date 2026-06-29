@@ -187,7 +187,8 @@ const SupplyAndLosses = () => {
         className="background-container"
         style={{
           backgroundImage: `url(${backgroundImg})`,
-        }}>
+        }}
+      >
         <div className="overlay"></div>
         <h1>
           {language === "en"
@@ -207,8 +208,8 @@ const SupplyAndLosses = () => {
                 </h1>
                 <p>
                   {language === "en"
-                    ? "In 2024, Georgia's centralized water supply systems supplied approximately 868 m³ of drinking water."
-                    : "2024 წელს საქართველოს ცენტრალიზებულმა წყალმომარაგების სისტემებმა დაახლოებით 868.5 მილიონი მ³ სასმელი წყალი მიაწოდა."}
+                    ? "In 2025, Georgia's centralized water supply systems supplied approximately 869.1 m³ of drinking water."
+                    : "2025 წელს საქართველოს ცენტრალიზებულმა წყალმომარაგების სისტემებმა დაახლოებით 869.1 მილიონი მ³ სასმელი წყალი მიაწოდა."}
                 </p>
                 <div className="bottom">
                   <div className="rr">
@@ -217,7 +218,7 @@ const SupplyAndLosses = () => {
                         ? "Connected Population"
                         : "მიერთებული მოსახლეობა"}
                     </h2>
-                    <div className="num">75.4%</div>
+                    <div className="num">72.8%</div>
                   </div>
                   <div className="border"></div>
                   <div className="ll">
@@ -226,7 +227,7 @@ const SupplyAndLosses = () => {
                         ? "System Losses"
                         : "სისტემის დანაკარგები"}
                     </h2>
-                    <div className="num">67.0%</div>
+                    <div className="num">64.4%</div>
                   </div>
                 </div>
               </div>
@@ -236,7 +237,8 @@ const SupplyAndLosses = () => {
               style={{
                 transform: `translateY(${waveHeight - waveHeight / 2}px)`,
               }}
-              className="faucet-svg">
+              className="faucet-svg"
+            >
               <Faucet />
             </div>
           </div>
@@ -252,7 +254,7 @@ const SupplyAndLosses = () => {
               </div>
               <div className="text">
                 <h1>
-                  239
+                  247
                   <span>{language === "en" ? "L/day" : "ლ/დღე"}</span>
                 </h1>
               </div>
@@ -265,8 +267,8 @@ const SupplyAndLosses = () => {
               </h1>
               <p>
                 {language === "en"
-                  ? "In 2024, the water consumption per capita by households was 87.2 cubic meters per year (approx. 239 liters/day)."
-                  : "2024 წელს შინამეურნეობების მიერ წყლის მოხმარება ერთ სულ მოსახლეზე შეადგენდა 87.2 კუბურ მეტრს წელიწადში (დაახლ. 239 ლიტრი/დღეში)."}
+                  ? "In 2025, the water consumption per capita by households was 90.1 cubic meters per year (approx. 247 liters/day)."
+                  : "2025 წელს შინამეურნეობების მიერ წყლის მოხმარება ერთ სულ მოსახლეზე შეადგენდა 90.1 კუბურ მეტრს წელიწადში (დაახლ. 247 ლიტრი/დღეში)."}
               </p>
             </div>
           </div>
@@ -283,8 +285,8 @@ const SupplyAndLosses = () => {
                 </h1>
                 <p>
                   {language === "en"
-                    ? "In 2024, 54.1% of the population was connected to a wastewater collection system, and 41.2% to treatment facilities."
-                    : "2024 წელს მოსახლეობის დაახლოებით 54.1% მიერთებული იყო ჩამდინარე წყლების შემკრებ სისტემასთან, ხოლო დაახლოებით 41.2% - გამწმენდ ნაგებობებთან."}
+                    ? "In 2025, 52.3% of the population was connected to a wastewater collection system, and 41.6% to treatment facilities."
+                    : "2025 წელს მოსახლეობის დაახლოებით 52.3% მიერთებული იყო წყალანირების ქსელთან, ხოლო დაახლოებით 41.6% - გამწმენდ ნაგებობებთან."}
                 </p>
                 <div className="bottom" style={{ gap: "50px" }}>
                   <div className="rr">
@@ -293,7 +295,7 @@ const SupplyAndLosses = () => {
                         ? "Population connected to wastewater collection system"
                         : "წყალარინების ქსელთან მიერთებული მოსახლეობა"}
                     </h2>
-                    <div className="num">53.7%</div>
+                    <div className="num">52.3%</div>
                   </div>
                   <div className="border"></div>
                   <div className="ll">
@@ -302,7 +304,7 @@ const SupplyAndLosses = () => {
                         ? "Population connected to the wastewater treatment plant"
                         : "გამწმენდ ნაგებობასთან მიერთებული მოსახლეობა"}
                     </h2>
-                    <div className="num">42.7%</div>
+                    <div className="num">41.6%</div>
                   </div>
                 </div>
               </div>
