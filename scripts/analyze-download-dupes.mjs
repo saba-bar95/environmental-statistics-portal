@@ -21,7 +21,7 @@ function groupByHash(files) {
 }
 
 for (const name of ["downloadPDF.js", "downloadExcel.js", "Download.jsx"]) {
-  const files = walk("src/assets/components/Pages", name);
+  const files = walk("src/pages", name);
   const groups = groupByHash(files);
   console.log(`\n${name}: ${files.length} files, ${Object.keys(groups).length} unique`);
   for (const [, list] of Object.entries(groups).sort((a, b) => b.length - a.length)) {

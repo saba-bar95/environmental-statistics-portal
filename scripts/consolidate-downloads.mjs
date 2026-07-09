@@ -1,6 +1,6 @@
 /**
  * Consolidates identical downloadPDF.js, downloadExcel.js, and Download.jsx copies
- * into src/assets/components/Download/. Updates imports; deletes local duplicates.
+ * into src/components/Download/. Updates imports; deletes local duplicates.
  */
 import fs from "fs";
 import path from "path";
@@ -9,8 +9,8 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const PAGES = path.join(ROOT, "src/assets/components/Pages");
-const SHARED = path.join(ROOT, "src/assets/components/Download");
+const PAGES = path.join(ROOT, "src/pages");
+const SHARED = path.join(ROOT, "src/components/Download");
 
 function walk(dir, name, acc = []) {
   for (const n of fs.readdirSync(dir)) {

@@ -8,7 +8,7 @@ import { fileURLToPath, pathToFileURL } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
-const pagesDir = path.join(root, "src/assets/components/Pages");
+const pagesDir = path.join(root, "src/pages");
 
 /**
  * Documented expectations. Update when Charts.jsx or page chart lists change.
@@ -73,18 +73,20 @@ function countRenderedChartBindings(filePath) {
 
 async function main() {
   const chartInfoUrl = pathToFileURL(
-    path.join(root, "src/assets/components/Pages/Climate/Emissions/chartInfo.js")
+    path.join(root, "src/pages/Climate/Emissions/chartInfo.js")
   ).href;
-  const { emissionsChartInfo, emissionsSearchCharts } = await import(chartInfoUrl);
+  const { emissionsChartInfo } = await import(chartInfoUrl);
 
   console.log("Chart registry audit\n");
 
-  if (emissionsChartInfo.length !== emissionsSearchCharts.length) {
+  const emissionsCount = emissionsChartInfo.length;
+  const emissionsExpected = routes.find((r) => r.key === "climate/emissions")?.search ?? 12;
+  if (emissionsCount !== emissionsExpected) {
     console.log(
-      `FAIL  emissions chartInfo (${emissionsChartInfo.length}) !== search export (${emissionsSearchCharts.length})`
+      `WARN  emissions chartInfo (${emissionsCount}) differs from audit expectation (${emissionsExpected})`
     );
   } else {
-    console.log(`OK    emissions chartInfo ↔ search export (${emissionsChartInfo.length} charts)`);
+    console.log(`OK    emissions chartInfo (${emissionsCount} charts)`);
   }
 
   let issues = 0;
@@ -93,7 +95,7 @@ async function main() {
   for (const route of routes) {
     const filePath = path.join(pagesDir, route.file);
     const rendered = countRenderedChartBindings(filePath);
-    const search = route.fromChartInfo ? emissionsSearchCharts.length : route.search;
+    const search = route.fromChartInfo ? emissionsCount : route.search;
     const searchOk = !route.fromChartInfo || search === route.search;
     const renderedOk = rendered === route.rendered;
     const ok = searchOk && renderedOk;

@@ -12,53 +12,53 @@ const lazyPage = (factory) => {
   );
 };
 
-const Homepage = lazyPage(() => import("./assets/components/Homepage/Homepage"));
-const Air = lazyPage(() => import("./assets/components/Pages/Air/Air"));
-const Climate = lazyPage(() => import("./assets/components/Pages/Climate/Climate"));
-const Water = lazyPage(() => import("./assets/components/Pages/Water/Water"));
+const Homepage = lazyPage(() => import("./pages/Homepage/Homepage"));
+const Air = lazyPage(() => import("./pages/Air/Air"));
+const Climate = lazyPage(() => import("./pages/Climate/Climate"));
+const Water = lazyPage(() => import("./pages/Water/Water"));
 const Biodiversity = lazyPage(
-  () => import("./assets/components/Pages/Biodiversity/Biodiversity")
+  () => import("./pages/Biodiversity/Biodiversity")
 );
-const Energy = lazyPage(() => import("./assets/components/Pages/Energy/Energy"));
+const Energy = lazyPage(() => import("./pages/Energy/Energy"));
 const Transport = lazyPage(
-  () => import("./assets/components/Pages/Transport/Transport")
+  () => import("./pages/Transport/Transport")
 );
-const Waste = lazyPage(() => import("./assets/components/Pages/Waste/Waste"));
-const Other = lazyPage(() => import("./assets/components/Pages/Other/Other"));
-const Reports = lazyPage(() => import("./assets/components/Pages/Reports/Reports"));
+const Waste = lazyPage(() => import("./pages/Waste/Waste"));
+const Other = lazyPage(() => import("./pages/Other/Other"));
+const Reports = lazyPage(() => import("./pages/Reports/Reports"));
 const Disasters = lazyPage(
-  () => import("./assets/components/Pages/Climate/Disasters/Disasters")
+  () => import("./pages/Climate/Disasters/Disasters")
 );
 const Emissions = lazyPage(
-  () => import("./assets/components/Pages/Climate/Emissions/Emissions")
+  () => import("./pages/Climate/Emissions/Emissions")
 );
 const Precipitation = lazyPage(
-  () => import("./assets/components/Pages/Climate/Precipitation/Precipitation")
+  () => import("./pages/Climate/Precipitation/Precipitation")
 );
 const Temperature = lazyPage(
-  () => import("./assets/components/Pages/Climate/Temperature/Temperature")
+  () => import("./pages/Climate/Temperature/Temperature")
 );
-const Majors = lazyPage(() => import("./assets/components/Pages/Water/Majors/Majors"));
+const Majors = lazyPage(() => import("./pages/Water/Majors/Majors"));
 const Protection = lazyPage(
-  () => import("./assets/components/Pages/Water/Protection/Protection")
+  () => import("./pages/Water/Protection/Protection")
 );
 const SupplyAndLosses = lazyPage(
-  () => import("./assets/components/Pages/Water/SupplyAndLosses/SupplyAndLosses")
+  () => import("./pages/Water/SupplyAndLosses/SupplyAndLosses")
 );
 const ProtectedAreas = lazyPage(
-  () => import("./assets/components/Pages/Biodiversity/ProtectedAreas/ProtectedAreas")
+  () => import("./pages/Biodiversity/ProtectedAreas/ProtectedAreas")
 );
 const ForestAndFieldFires = lazyPage(
   () =>
-    import("./assets/components/Pages/Biodiversity/ForestAndFieldFires/ForestAndFieldFires")
+    import("./pages/Biodiversity/ForestAndFieldFires/ForestAndFieldFires")
 );
 const ForestArea = lazyPage(
-  () => import("./assets/components/Pages/Biodiversity/ForestArea/ForestArea")
+  () => import("./pages/Biodiversity/ForestArea/ForestArea")
 );
 const ForestResources = lazyPage(
   () =>
     import(
-      "./assets/components/Pages/Biodiversity/ForestArea/ForestResources/ForestResources"
+      "./pages/Biodiversity/ForestArea/ForestResources/ForestResources"
     )
 );
 

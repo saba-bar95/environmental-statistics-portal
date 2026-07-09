@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Header from "./assets/components/Header/Header";
-import Footer from "./assets/components/Footer/Footer";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
 import { useAppTitle } from "./hooks/useAppTitle";

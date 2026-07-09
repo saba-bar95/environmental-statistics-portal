@@ -9,7 +9,7 @@ import { legacyRawCharts } from "../src/chartRegistry/legacyRawCharts.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
-const pagesRoot = path.join(root, "src/assets/components/Pages");
+const pagesRoot = path.join(root, "src/pages");
 
 function stripPaths(charts) {
   return charts.map(({ title_ge, title_en, chartID, search, ...rest }) => {

@@ -8,8 +8,8 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const PAGES = path.join(ROOT, "src/assets/components/Pages");
-const COMPONENTS = path.join(ROOT, "src/assets/components");
+const PAGES = path.join(ROOT, "src/pages");
+const COMPONENTS = path.join(ROOT, "src/components");
 
 const SKIP_FILES = new Set([
   "HeatmapChart.jsx", // non-standard markup

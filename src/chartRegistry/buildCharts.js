@@ -4,22 +4,22 @@
  */
 import { flattenChartsForSearch } from "./flattenSearchIndex.js";
 
-import { otherChartInfo } from "../assets/components/Pages/Other/chartInfo.js";
-import { wasteChartInfo } from "../assets/components/Pages/Waste/chartInfo.js";
-import { transportChartInfo } from "../assets/components/Pages/Transport/chartInfo.js";
-import { energyChartInfo } from "../assets/components/Pages/Energy/chartInfo.js";
-import { airChartInfo } from "../assets/components/Pages/Air/chartInfo.js";
-import { reportsChartInfo } from "../assets/components/Pages/Reports/chartInfo.js";
-import { disastersChartInfo } from "../assets/components/Pages/Climate/Disasters/chartInfo.js";
-import { temperatureChartInfo } from "../assets/components/Pages/Climate/Temperature/chartInfo.js";
-import { precipitationChartInfo } from "../assets/components/Pages/Climate/Precipitation/chartInfo.js";
-import { emissionsChartInfo } from "../assets/components/Pages/Climate/Emissions/chartInfo.js";
-import { majorsChartInfo } from "../assets/components/Pages/Water/Majors/chartInfo.js";
-import { protectionChartInfo } from "../assets/components/Pages/Water/Protection/chartInfo.js";
-import { supplyAndLossesChartInfo } from "../assets/components/Pages/Water/SupplyAndLosses/chartInfo.js";
-import { protectedAreasChartInfo } from "../assets/components/Pages/Biodiversity/ProtectedAreas/chartInfo.js";
-import { forestResourcesChartInfo } from "../assets/components/Pages/Biodiversity/ForestArea/ForestResources/chartInfo.js";
-import { forestAndFieldFiresChartInfo } from "../assets/components/Pages/Biodiversity/ForestAndFieldFires/chartInfo.js";
+import { otherChartInfo } from "../pages/Other/chartInfo.js";
+import { wasteChartInfo } from "../pages/Waste/chartInfo.js";
+import { transportChartInfo } from "../pages/Transport/chartInfo.js";
+import { energyChartInfo } from "../pages/Energy/chartInfo.js";
+import { airChartInfo } from "../pages/Air/chartInfo.js";
+import { reportsChartInfo } from "../pages/Reports/chartInfo.js";
+import { disastersChartInfo } from "../pages/Climate/Disasters/chartInfo.js";
+import { temperatureChartInfo } from "../pages/Climate/Temperature/chartInfo.js";
+import { precipitationChartInfo } from "../pages/Climate/Precipitation/chartInfo.js";
+import { emissionsChartInfo } from "../pages/Climate/Emissions/chartInfo.js";
+import { majorsChartInfo } from "../pages/Water/Majors/chartInfo.js";
+import { protectionChartInfo } from "../pages/Water/Protection/chartInfo.js";
+import { supplyAndLossesChartInfo } from "../pages/Water/SupplyAndLosses/chartInfo.js";
+import { protectedAreasChartInfo } from "../pages/Biodiversity/ProtectedAreas/chartInfo.js";
+import { forestResourcesChartInfo } from "../pages/Biodiversity/ForestArea/ForestResources/chartInfo.js";
+import { forestAndFieldFiresChartInfo } from "../pages/Biodiversity/ForestAndFieldFires/chartInfo.js";
 
 /** Nested structure (backward compatible with Charts.air, Charts.climate[0].disasters, etc.) */
 const Charts = {

@@ -1,0 +1,299 @@
+import { useEffect, useState } from "react";
+import {
+  ComposedChart,
+  Bar,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  Brush,
+} from "recharts";
+import { useParams } from "react-router-dom";
+import commonData from "../../../api/commonData";
+import Download from "./Download/Download";
+import {
+  ChartLoadingCard,
+  ChartErrorCard,
+  ChartEmptyCard,
+} from "../../../components/ChartCard/ChartStateCards";
+
+const CompromisedCharts = ({ chartInfo }) => {
+  const { language } = useParams();
+  const [chartData, setChartData] = useState([]);
+  const [selectedTexts, setSelectedTexts] = useState([]);
+  const [visibleItems, setVisibleItems] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch and process data
+  useEffect(() => {
+    const getData = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const [dataResult, metaDataResult] = await Promise.all([
+          commonData(chartInfo.id, chartInfo.types[0], language),
+          commonData(chartInfo.id, chartInfo.types[1], language),
+        ]);
+
+        const valueTexts =
+          metaDataResult?.data?.metadata?.variables[0].valueTexts.map(
+            (region, i) => ({ name: region, id: i })
+          ) || [];
+
+        const selected = chartInfo.selectedIndices
+          .map((index) => valueTexts[index])
+          .filter(Boolean);
+
+        setSelectedTexts(selected);
+
+        // Initialize visibility for all items (first as bar, rest as lines)
+        setVisibleItems(
+          selected.reduce((acc, text) => {
+            acc[text.name] = true;
+            return acc;
+          }, {})
+        );
+
+        const yearData =
+          metaDataResult?.data?.metadata?.variables[1].valueTexts.map(
+            (year, i) => ({ year: year, id: i })
+          ) || [];
+
+        const rawData = dataResult?.data?.data || [];
+
+        const processedData = yearData
+          .map(({ year }) => {
+            const dataItem = rawData.find((item) => item.year == year);
+            if (!dataItem) return null;
+            const dataPoint = { year };
+            selected.forEach((text) => {
+              dataPoint[text.name] = dataItem[String(text.id)];
+            });
+            return dataPoint;
+          })
+          .filter(Boolean);
+
+        setChartData(processedData);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+        setError("Failed to load chart data. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getData();
+  }, [language, chartInfo]);
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <ChartLoadingCard
+        id={chartInfo.chartID}
+        title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
+        unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
+        language={language}
+      />
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <ChartErrorCard
+        id={chartInfo.chartID}
+        title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
+        unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
+        language={language}
+        error={error}
+      />
+    );
+  }
+
+  // Custom Legend Component
+  const CustomLegend = () => {
+    const visibleCount = Object.values(visibleItems).filter(Boolean).length;
+
+    return (
+      <ul className="recharts-default-legend">
+        {selectedTexts.map((text, index) => (
+          <li
+            key={`legend-item-${text.name}`}
+            className={`recharts-legend-item legend-item-${index}`}
+            onClick={() => {
+              // Prevent toggling off if this is the last visible item
+              if (visibleItems[text.name] && visibleCount <= 1) return;
+
+              setVisibleItems((prev) => ({
+                ...prev,
+                [text.name]: !prev[text.name],
+              }));
+            }}
+            style={{
+              cursor: "pointer",
+              opacity: visibleItems[text.name] ? 1 : 0.5,
+            }}>
+            <span
+              className="recharts-legend-item-icon"
+              style={{
+                backgroundColor:
+                  chartInfo.colors[index % chartInfo.colors.length],
+                flexShrink: 0,
+                width: 12,
+                height: 12,
+                display: "inline-block",
+                marginRight: 8,
+                borderRadius: 0,
+              }}></span>
+            <span className="recharts-legend-item-text">{text.name}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  // Custom Tooltip Component
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (!active || !payload || !payload.length) return null;
+
+    return (
+      <div className="custom-tooltip">
+        <div className="tooltip-container">
+          <p className="tooltip-label">
+            {label} {language === "en" ? "Year" : "წელი"}
+          </p>
+          {payload.map(({ value, stroke, dataKey }) => {
+            const text = selectedTexts.find((t) => t.name === dataKey);
+
+            return (
+              <p
+                key={`item-${dataKey}`}
+                className="text"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "10px",
+                  alignItems: "center",
+                }}>
+                <span>
+                  <span
+                    style={{
+                      backgroundColor: stroke,
+                      width: 12,
+                      height: 12,
+                      display: "inline-block",
+                      marginRight: 8,
+                    }}
+                    className="before-span"></span>
+                  {text?.name} :
+                </span>
+                <span style={{ fontWeight: 900, marginLeft: "5px" }}>
+                  {value?.toFixed(1)}
+                </span>
+              </p>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  // Show empty state if no data
+  if (chartData.length === 0) {
+    return (
+      <ChartEmptyCard
+        id={chartInfo.chartID}
+        title={language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
+        unit={language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}
+        language={language}
+      />
+    );
+  }
+
+  return (
+    <div className="chart-wrapper" id={chartInfo.chartID}>
+      <div className="header">
+        <div className="right">
+          <div className="ll"></div>
+          <div className="rr">
+            <h1>
+              {language === "ge" ? chartInfo.title_ge : chartInfo.title_en}
+            </h1>
+            <p>{language === "ge" ? chartInfo.unit_ge : chartInfo.unit_en}</p>
+          </div>
+        </div>
+        <div className="left">
+          <Download
+            data={chartData}
+            filename={chartInfo[`title_${language}`]}
+            unit={chartInfo[`unit_${language}`]}
+          />
+        </div>
+      </div>
+
+      <ResponsiveContainer width="100%" height={460}>
+        <ComposedChart data={chartData} stackOffset="sign">
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
+          <XAxis dataKey="year" tick={{ fontSize: 15 }} tickLine={false} />
+          <YAxis tick={{ fontSize: 12 }} />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend
+            wrapperStyle={{ marginBottom: -20 }}
+            content={<CustomLegend />}
+            verticalAlign="bottom"
+            align="center"
+          />
+
+          {selectedTexts.length > 0 && visibleItems[selectedTexts[0]?.name] && (
+            <Bar
+              key={`bar-${selectedTexts[0]?.name}`}
+              dataKey={selectedTexts[0]?.name}
+              fill={chartInfo.colors[0]}
+              stroke={chartInfo.colors[0]}
+              name={selectedTexts[0]?.name}
+              barSize={30}
+            />
+          )}
+
+          {selectedTexts.slice(1).map((text, index) =>
+            visibleItems[text.name] ? (
+              <Line
+                key={`line-${text.name}`}
+                type="monotone"
+                dataKey={text.name}
+                stroke={chartInfo.colors[(index + 1) % chartInfo.colors.length]}
+                strokeWidth={3}
+                name={text.name}
+                dot={{
+                  fill: chartInfo.colors[(index + 1) % chartInfo.colors.length],
+                  strokeWidth: 2,
+                  r: 3,
+                }}
+                activeDot={{
+                  r: 6,
+                  fill: chartInfo.colors[(index + 1) % chartInfo.colors.length],
+                  stroke: "#fff",
+                  strokeWidth: 2,
+                }}
+              />
+            ) : null
+          )}
+
+          <Brush
+            dataKey="year"
+            height={20}
+            stroke="#8884d8"
+            travellerWidth={5}
+          />
+        </ComposedChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+export default CompromisedCharts;

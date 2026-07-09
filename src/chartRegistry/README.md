@@ -12,7 +12,7 @@ main.jsx loads → buildCharts.js runs → all chartInfo.js files imported → s
 
 ## Adding a chart
 
-1. Open the page’s `chartInfo.js` (e.g. `Pages/Climate/Emissions/chartInfo.js`).
+1. Open the page’s `chartInfo.js` (e.g. `pages/Climate/Emissions/chartInfo.js`).
 2. Add an entry to `chartDefinitions` / `emissionsCharts` with `title_ge`, `title_en`, and explicit `chartID`.
 3. Render the chart on the page and set `id={chartInfo.chartID}` on the wrapper.
 4. Search updates automatically — nothing to add in `Charts.jsx`.
@@ -21,7 +21,7 @@ main.jsx loads → buildCharts.js runs → all chartInfo.js files imported → s
 
 | File | Role |
 |------|------|
-| `Pages/**/chartInfo.js` | Single source of truth per page |
+| `pages/**/chartInfo.js` | Single source of truth per page |
 | `chartRegistry/buildCharts.js` | Assembles nested `Charts` + flat `searchIndex` |
 | `chartRegistry/helpers.js` | `definePageCharts()`, `withSearchPath()` |
 | `Charts.jsx` | Re-exports registry (backward compatible) |

@@ -8,8 +8,8 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const PAGES = path.join(ROOT, "src/assets/components/Pages");
-const SHARED = path.join(ROOT, "src/assets/components/Download");
+const PAGES = path.join(ROOT, "src/pages");
+const SHARED = path.join(ROOT, "src/components/Download");
 
 function walk(dir, name, acc = []) {
   for (const n of fs.readdirSync(dir)) {

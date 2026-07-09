@@ -1,14 +1,14 @@
-@use "/src/assets/styles/_breakpoints.scss" as *;
-@use "/src/assets/styles/fonts.scss" as *;
-@use "/src/assets/styles/Section.scss" as *;
-@use "/src/assets/styles/Children.scss" as *;
-@use "/src/assets/styles/ChartsSection.scss" as *;
-@use "/src/assets/styles/ChartContainer.scss" as *;
-@use "/src/assets/styles/ChartWrapper.scss" as *;
-@use "/src/assets/styles/SpinnerAndError.scss" as *;
-@use "/src/assets/components/Pages/Water/SupplyAndLosses/supply-and-losses-page.scss"
+@use "/src/styles/_breakpoints.scss" as *;
+@use "/src/styles/fonts.scss" as *;
+@use "/src/styles/Section.scss" as *;
+@use "/src/styles/Children.scss" as *;
+@use "/src/styles/ChartsSection.scss" as *;
+@use "/src/styles/ChartContainer.scss" as *;
+@use "/src/styles/ChartWrapper.scss" as *;
+@use "/src/styles/SpinnerAndError.scss" as *;
+@use "/src/pages/Water/SupplyAndLosses/supply-and-losses-page.scss"
   as *;
-@use "/src/assets/styles/PieChart.scss" as *;
+@use "/src/styles/PieChart.scss" as *;
 
 * {
   margin: 0;
