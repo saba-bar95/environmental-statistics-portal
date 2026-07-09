@@ -29,17 +29,19 @@ A bilingual (`/ge`, `/en`) React SPA that visualizes official Georgian environme
 | Routes (lazy pages) | `src/routes.jsx` |
 | App shell | `src/App.jsx` |
 | Chart registry | `src/chartRegistry/` |
-| Page charts | `src/assets/components/Pages/**/chartInfo.js` |
-| Search bar | `src/assets/components/SearchBar/SearchBar.jsx` |
-| Shared chart states | `src/assets/components/ChartCard/ChartStateCards.jsx` |
-| Shared downloads | `src/assets/components/Download/` |
-| API helpers | `src/assets/fetchFunctions/` |
+| Page charts | `src/pages/**/chartInfo.js` |
+| Search bar | `src/components/SearchBar/SearchBar.jsx` |
+| Shared chart states | `src/components/ChartCard/ChartStateCards.jsx` |
+| Shared downloads | `src/components/Download/` |
+| API helpers | `src/api/` |
+| Static fonts/images | `src/assets/fonts/`, `src/assets/images/` |
+| Global styles | `src/styles/` |
 
 ## Common tasks
 
 **New chart:** `chartInfo.js` entry → chart component with `id={chartInfo.chartID}` → `ChartStateCards` for load/error/empty → page uses `useScrollToChartHash()` → `npm run audit:charts`.
 
-**New page:** component under `Pages/` → lazy route in `routes.jsx` → navigation in `Header/Navigation/sections/sections.jsx`.
+**New page:** component under `src/pages/` → lazy route in `routes.jsx` → navigation in `src/components/Header/Navigation/sections/sections.jsx`.
 
 **Refactor duplicate downloads:** check `scripts/consolidate-all-download-groups.mjs`; keep bespoke exporters if signatures differ.
 

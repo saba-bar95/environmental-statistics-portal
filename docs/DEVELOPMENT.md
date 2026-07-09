@@ -28,18 +28,18 @@ Day-to-day workflows and conventions for the Environmental Statistics Portal.
 ## File conventions
 
 - **Components:** Function components; co-locate `Component.jsx` + `Component.scss` when needed.
-- **Pages:** `src/assets/components/Pages/<Theme>/<SubPage>/` with optional `Charts/`, `chartInfo.js`, hero `Texts/`.
-- **Imports:** Prefer existing relative depth patterns; chart cards live at `src/assets/components/ChartCard/`.
-- **Styles:** Global chart styles in `src/assets/styles/`; page-specific SCSS next to the page.
+- **Pages:** `src/pages/<Theme>/<SubPage>/` with optional `Charts/`, `chartInfo.js`, hero `Texts/`.
+- **Imports:** Prefer existing relative depth patterns; shared chart UI lives in `src/components/ChartCard/`.
+- **Styles:** Global chart styles in `src/styles/`; page-specific SCSS next to the page.
 - **Lint:** Unused vars named with leading `_` or uppercase are ignored per `eslint.config.js`.
 
 ## Routing checklist
 
 When adding a new page:
 
-1. Create the page component under `Pages/`.
+1. Create the page component under `src/pages/`.
 2. Add a lazy import and child route in `src/routes.jsx`.
-3. Add navigation entry in `Header/Navigation/sections/sections.jsx` if it should appear in the menu.
+3. Add navigation entry in `src/components/Header/Navigation/sections/sections.jsx` if it should appear in the menu.
 4. Add `chartInfo.js` and register charts if the page has searchable visuals.
 
 ## Chart checklist
@@ -61,7 +61,7 @@ When adding or editing a chart:
 
 ## Refactoring notes
 
-- **Shared downloads:** Prefer importing from `assets/components/Download/`; run consolidation script after bulk deletes.
+- **Shared downloads:** Prefer importing from `src/components/Download/`; run consolidation script after bulk deletes.
 - **Tooltips:** Multi-series Recharts charts can use `ChartLineTooltip` + `ChartLineLegend` (see Energy `LineCharts.jsx`).
 - **Retries:** Use `retryKey` in `useEffect` deps, not `window.location.reload()`.
 - **Codemods:** Scripts under `scripts/` are one-off helpers; read output and fix import paths manually when needed.
@@ -69,7 +69,7 @@ When adding or editing a chart:
 ## Deployment
 
 - Hosted on **Vercel**; SPA fallback configured in `vercel.json`.
-- Environment variables: document any API base URLs in this file when they are introduced (currently many fetches use bundled/static endpoints in `fetchFunctions`).
+- Environment variables: document any API base URLs in this file when they are introduced (currently many fetches use bundled/static endpoints in `src/api/`).
 
 ## Documentation map
 

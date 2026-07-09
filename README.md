@@ -101,13 +101,12 @@ src/
   routes.jsx            # Lazy-loaded page routes
   App.jsx               # Header, Footer, Outlet
   chartRegistry/        # Global search index from chartInfo.js files
-  hooks/                # Scroll-to-chart, fetch helpers
-  assets/
-    components/Pages/   # Dashboard pages + chartInfo.js per section
-    components/ChartCard/   # Shared loading/error/tooltip UI
-    components/Download/    # Shared export helpers
-    fetchFunctions/     # Data API wrappers
-    styles/             # Global SCSS
+  hooks/                # Scroll-to-chart, app title, fetch helpers
+  pages/                # Dashboard pages + Homepage; chartInfo.js per section
+  components/           # Shared shell UI (Header, ChartCard, Download, …)
+  api/                  # Data API wrappers (commonData, riversAndLakes, …)
+  styles/               # Global SCSS
+  assets/               # Static fonts and images only
 scripts/                # Audit and maintenance codemods
 docs/                   # Architecture and development guides
 ```
